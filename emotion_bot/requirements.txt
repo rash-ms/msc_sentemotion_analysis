@@ -1,4 +1,5 @@
-Flask
+flask
+gunicorn
 joblib
 scikit-learn
-requests
+tensorflow  # this includes keras
