@@ -1,9 +1,11 @@
+import os
 from flask import Flask, request
 import requests
 from utils import predict_sentiment_emotion
 
 app = Flask(__name__)
-BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 TELEGRAM_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 @app.route('/', methods=['GET'])
