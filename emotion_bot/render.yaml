@@ -1,15 +1,6 @@
-name: sentiment-analysis
-dependencies:
-  - python=3.9
-  - pandas
-  - numpy
-  - scikit-learn
-  - matplotlib
-  - pip
-  - pip:
-    - streamlit
-    - import-ipynb
-    - plotly
-    - seaborn
-    - nltk
-    - textblob
+services:
+  - type: web
+    name: sentiment-analysis
+    env: python
+    buildCommand: pip install -r emotion_bot/requirements.txt
+    startCommand: python emotion_bot/app.py

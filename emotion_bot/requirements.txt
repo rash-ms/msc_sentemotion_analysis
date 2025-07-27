@@ -1,8 +1,11 @@
+setuptools>=42
+wheel
+
 flask
 gunicorn
 joblib
 scikit-learn
-numpy==1.25.0  # compatible
+numpy==1.25.0
 pandas
 matplotlib
 streamlit
@@ -11,5 +14,3 @@ plotly
 seaborn
 nltk
 textblob
-setuptools>=42
-wheel
