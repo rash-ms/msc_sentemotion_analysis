@@ -2,7 +2,6 @@ flask
 gunicorn
 joblib
 scikit-learn
-tensorflow-cpu==2.19.0
 numpy==1.25.0  # compatible
 pandas
 matplotlib
