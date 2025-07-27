@@ -1,6 +1,7 @@
 import joblib
 import re
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
 
 # Load DL models and tokenizer
 base_path = '../model_src_code/save_models/'

@@ -2,4 +2,4 @@ flask
 gunicorn
 joblib
 scikit-learn
-tensorflow  # this includes keras
+tensorflow-cpu==2.13.0
