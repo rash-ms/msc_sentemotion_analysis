@@ -1,2 +1,16 @@
-build:
-  pythonVersion: 3.9
+name: sentiment-analysis
+dependencies:
+  - python=3.9
+  - tensorflow=2.13.0
+  - pandas
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - pip
+  - pip:
+    - streamlit
+    - import-ipynb
+    - plotly
+    - seaborn
+    - nltk
+    - textblob
