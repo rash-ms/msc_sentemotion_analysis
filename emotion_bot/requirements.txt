@@ -11,3 +11,5 @@ plotly
 seaborn
 nltk
 textblob
+setuptools>=42
+wheel
