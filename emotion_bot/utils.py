@@ -5,17 +5,12 @@ import re
 # Load DL models and tokenizer
 base_path = './save_models'
 
+# sentiment_model = joblib.load(f"{base_path}/sent_cnn_best_model.pkl")  # CNN expects padded sequences
+# emotion_model = joblib.load(f"{base_path}/emo_gru_best_model.pkl")
+# # tokenizer = joblib.load(f"{base_path}/dl_tokenizer.pkl")  # Used to convert text to sequence
 
 sentiment_model = joblib.load(f"{base_path}/logistic_regression_best_model.pkl")
-# sentiment_model = joblib.load(f"{base_path}/sent_cnn_best_model.pkl")  # CNN expects padded sequences
-# emotion_model = joblib.load(f"{base_path}/emo_cnn_best_model.pkl")
-# # tokenizer = joblib.load(f"{base_path}/dl_tokenizer.pkl")  # Used to convert text to sequence
-# vectorizer = joblib.load(f"{base_path}/ml_vectorizer.pkl")
-
-
-sentiment_model = joblib.load(f"{base_path}/sent_lr_model.pkl")
-# emotion_model = joblib.load(f"{base_path}/emo_lr_model.pkl")
-vectorizer = joblib.load(f"{base_path}/vectorizer.pkl")
+vectorizer = joblib.load(f"{base_path}/ml_vectorizer.pkl")
 
 # emotion = emotion_model.predict(X)[0]
 
@@ -27,9 +22,10 @@ def predict_sentiment_emotion(text):
     X = vectorizer.transform([text])
 
     sentiment = sentiment_model.predict(X)[0]
+    emotion = "placeholder"
 
 
-    return sentiment   #emotion
+    return sentiment, emotion
 
 # # Make sure this maxlen matches what was used during training
 # MAXLEN = 100
