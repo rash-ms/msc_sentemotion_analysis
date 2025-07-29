@@ -3,7 +3,7 @@ import re
 # from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Load DL models and tokenizer
-base_path = '../save_models'
+base_path = './save_models'
 
 sentiment_model = joblib.load(f"{base_path}/sent_cnn_best_model.pkl")  # CNN expects padded sequences
 emotion_model = joblib.load(f"{base_path}/emo_cnn_best_model.pkl")
