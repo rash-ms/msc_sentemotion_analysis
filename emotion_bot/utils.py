@@ -10,7 +10,7 @@ base_path = './save_models'
 # # tokenizer = joblib.load(f"{base_path}/dl_tokenizer.pkl")  # Used to convert text to sequence
 
 sentiment_model = joblib.load(f"{base_path}/logistic_regression_best_model.pkl")
-vectorizer = joblib.load(f"{base_path}/ml_vectorizer.pkl")
+vectorizer = joblib.load(f"{base_path}/sentiment_pipeline.pkl")
 
 # emotion = emotion_model.predict(X)[0]
 
