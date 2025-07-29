@@ -14,5 +14,3 @@ plotly
 seaborn
 nltk
 textblob
-tensorflow>=2.15.0
-keras>=3.0.0
