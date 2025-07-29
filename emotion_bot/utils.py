@@ -19,12 +19,8 @@ def clean_text(text):
 
 def predict_sentiment_emotion(text):
     text = clean_text(text)
-    X = vectorizer.transform([text])
-
-    sentiment = sentiment_model.predict(X)[0]
-    emotion = "placeholder"
-
-
+    sentiment = vectorizer.predict([text])[0]  # predict directly using pipeline
+    emotion = "placeholder"  # if emotion model not integrated yet
     return sentiment, emotion
 
 # # Make sure this maxlen matches what was used during training
