@@ -21,7 +21,10 @@ def predict_sentiment_emotion(text, mode="both"):
     sentiment_emojis = {
         "positive": "😊",
         "negative": "😞",
-        "neutral": "😐"
+        "neutral": "😐",
+        1: "😊",   # optional fallback
+        0: "😞",   # optional fallback
+        2: "😐"    # optional fallback
     }
 
     emotion_emojis = {
@@ -32,27 +35,38 @@ def predict_sentiment_emotion(text, mode="both"):
     if mode == "sentiment":
         X = sentiment_vectorizer.transform([text])
         sentiment_idx = sentiment_model.predict(X)[0]
-        sentiment = sentiment_model.classes_[sentiment_idx]  # Convert numeric to label
-        sent_icon = sentiment_emojis.get(sentiment.lower(), "🧠")
+
+        # Convert int to label using model.classes_ (if available)
+        if hasattr(sentiment_model, "classes_"):
+            sentiment = sentiment_model.classes_[sentiment_idx]
+        else:
+            sentiment = str(sentiment_idx)  # fallback to raw value
+
+        sent_icon = sentiment_emojis.get(str(sentiment).lower(), "🧠")
         return f"{sent_icon} Sentiment: {sentiment}"
 
     elif mode == "emotion":
         X = emotion_vectorizer.transform([text])
         emotion = emotion_model.predict(X)[0]
-        emo_icon = emotion_emojis.get(str(emotion).lower(), "🎭")  # safer with str()
+        emo_icon = emotion_emojis.get(str(emotion).lower(), "🎭")
         return f"{emo_icon} Emotion: {emotion}"
 
     else:
         X_sent = sentiment_vectorizer.transform([text])
         sentiment_idx = sentiment_model.predict(X_sent)[0]
-        sentiment = sentiment_model.classes_[sentiment_idx]
-        sent_icon = sentiment_emojis.get(sentiment.lower(), "🧠")
+        if hasattr(sentiment_model, "classes_"):
+            sentiment = sentiment_model.classes_[sentiment_idx]
+        else:
+            sentiment = str(sentiment_idx)
+
+        sent_icon = sentiment_emojis.get(str(sentiment).lower(), "🧠")
 
         X_emo = emotion_vectorizer.transform([text])
         emotion = emotion_model.predict(X_emo)[0]
         emo_icon = emotion_emojis.get(str(emotion).lower(), "🎭")
 
         return f"{sent_icon} Sentiment: {sentiment}\n{emo_icon} Emotion: {emotion}"
+
 
 
 
