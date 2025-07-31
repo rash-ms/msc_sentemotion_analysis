@@ -6,7 +6,7 @@ import re
 base_path = './save_models'
 # Load ML models
 sentiment_model = joblib.load(f"{base_path}/sent_1_naive_bayes_model.pkl")
-emotion_model = joblib.load(f"{base_path}/sent_4_naive_bayes_model.pkl.pkl")
+emotion_model = joblib.load(f"{base_path}/sent_4_naive_bayes_model.pkl")
 
 # Load vectorizers
 sentiment_vectorizer = joblib.load(f"{base_path}/ml_sent_vectorizer.pkl")
