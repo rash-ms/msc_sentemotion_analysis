@@ -179,6 +179,9 @@ def prep_ml_data(df, x_col, y_col, save_path, skip_svd=False):
     label_to_index = {label: idx for idx, label in enumerate(label_list)}
     df['label'] = df[y_col].map(label_to_index)
 
+    # *************** Save label list ***************
+    joblib.dump(label_list, save_path.replace(".pkl", "_labels.pkl"))
+
     label_list = list(label_to_index.keys())
     num_classes = len(label_list)
 
@@ -399,16 +402,16 @@ def plot_training_metrics(preds, model_name):
 
 #%% ##=== RESULT ===
 
-optimized_models_summary = []
+# def append_optimized_metrics(results, model_type, model_object):
+def append_optimized_metrics(results, model_type, model_object, summary_list):
 
-def append_optimized_metrics(results, model_type, model_object):
-    global optimized_models_summary
+    # global optimized_models_summary
 
     opt_key = f"Optimized {model_type}"
 
     if opt_key in results:
         metrics = results[opt_key]
-        optimized_models_summary.append({
+        summary_list.append({
             "Model": model_type,
             "Accuracy": round(metrics["Accuracy"], 4),
             "F1-Score": round(metrics["F1-Score"], 4),
@@ -416,6 +419,10 @@ def append_optimized_metrics(results, model_type, model_object):
             "ROC AUC": round(metrics["ROC AUC"], 4),
             "Object": model_object
         })
+
+
+
+
 
 #%% ##========================== DEEP LEARNING MODEL ===========================
 # Set seed

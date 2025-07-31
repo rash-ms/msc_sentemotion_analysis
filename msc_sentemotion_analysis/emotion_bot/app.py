@@ -21,7 +21,8 @@ def telegram_webhook():
         text = data['message'].get('text', '')
         message_id = data['message']['message_id']
 
-        reply = predict_sentiment_emotion(text)  # 👈 Clean and emoji-rich reply from utils
+        # reply = predict_sentiment_emotion(text)
+        reply = predict_sentiment_emotion(text, mode="both")
         send_message(chat_id, reply, reply_to=message_id)
 
     return {'ok': True}
@@ -35,7 +36,7 @@ def send_message(chat_id, text, reply_to=None):
     }
 
     if reply_to:
-        payload["reply_to_message_id"] = reply_to  # 👈 Reply formatting
+        payload["reply_to_message_id"] = reply_to  # Reply formatting
 
     requests.post(f"{TELEGRAM_URL}/sendMessage", json=payload)
 
