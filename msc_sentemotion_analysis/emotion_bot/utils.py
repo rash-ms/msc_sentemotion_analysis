@@ -31,7 +31,7 @@ def predict_sentiment_emotion(text, mode="both"):
     }
 
     emotion_emojis = {
-        "joy": "😄", "sadness": "😢", "anger": "😠", "fear": "😨",
+        "joy": "😄", "sad": "😢", "anger": "😠", "fear": "😨",
         "surprise": "😲", "disgust": "🤢", "love": "❤️", "boredom": "😴", "neutral": "😐"
     }
 
