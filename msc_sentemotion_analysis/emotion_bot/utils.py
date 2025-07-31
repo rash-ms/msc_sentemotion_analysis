@@ -1,10 +1,10 @@
 import joblib
 import re
-# from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-# Save Path
+# Define base path
 base_path = './save_models'
-# Load ML models
+
+# Load trained models
 sentiment_model = joblib.load(f"{base_path}/sent_1_naive_bayes_model.pkl")
 emotion_model = joblib.load(f"{base_path}/eno_4_naive_bayes_model.pkl")
 
@@ -12,12 +12,13 @@ emotion_model = joblib.load(f"{base_path}/eno_4_naive_bayes_model.pkl")
 sentiment_vectorizer = joblib.load(f"{base_path}/ml_sent_vectorizer.pkl")
 emotion_vectorizer = joblib.load(f"{base_path}/ml_emo_vectorizer.pkl")
 
+# Load saved label lists
 sentiment_labels = joblib.load(f"{base_path}/ml_sent_vectorizer_labels.pkl")
 emotion_labels = joblib.load(f"{base_path}/ml_emo_vectorizer_labels.pkl")
 
 def clean_text(text):
+    """Cleans input text by removing punctuation and lowering case."""
     return re.sub(r'[^\w\s]', '', text.lower().strip())
-
 
 def predict_sentiment_emotion(text, mode="both"):
     """Predicts sentiment and/or emotion from text and returns emoji-enhanced output."""
