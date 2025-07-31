@@ -1,0 +1,16 @@
+pip==24.3.1
+setuptools==75.1.0
+wheel==0.44.0
+flask
+gunicorn
+joblib
+scikit-learn
+numpy>=1.26.0
+pandas
+matplotlib
+streamlit
+import-ipynb
+plotly
+seaborn
+nltk
+textblob
