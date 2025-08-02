@@ -8,6 +8,7 @@ import warnings
 import import_ipynb
 import sys
 import joblib
+import re
 
 # Data processing libraries
 import numpy as np
@@ -20,6 +21,7 @@ import cufflinks as cf
 import scipy.stats as stats
 import pyforest
 from wordcloud import WordCloud
+from textblob import TextBlob
 
 # Terminal formatting
 from colorama import Fore, Style
@@ -85,6 +87,16 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
 
+#%% ## clean_text
+def clean_text(text):
+    if pd.isna(text):
+        return np.nan
+    text = re.sub(r'Ã[\x80-\xBF]+', ' ', text)
+    text = re.sub(r'[^a-zA-Zก-ฮะ-์\s]', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = text.strip()
+    return text.lower()
+
 #%% ##Function to check missing values
 def check_missing_values(df):
     missing_values = df.isnull().agg(['sum', 'mean']).T.sort_values(by='sum', ascending=False)
@@ -142,7 +154,6 @@ def plot_categorical_distributions(columns_categorical, data, palette='muted',ex
     print(data[columns_categorical].value_counts())
 
 #%% ##Function for plot_sentiment_distribution
-
 def plot_sentiment_distribution(data, text_column, sentiment_column='sentiment_value', figsize=(15, 6),
                                 df_name='sentiment'):
     data[sentiment_column] = data[text_column].apply(lambda x: TextBlob(x).sentiment.polarity)
