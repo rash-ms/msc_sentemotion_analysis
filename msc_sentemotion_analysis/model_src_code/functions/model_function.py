@@ -123,7 +123,40 @@ def inspect_columns(df, cols=None):
     # Create and return a summary DataFrame
     return pd.DataFrame(summary_data)
 
+#%% ##Function for plot_categorical_distributions
+
+def plot_categorical_distributions(columns_categorical, data, palette='muted',explode=0.03):
+    plt.figure(figsize=(15, 6))
+
+    for i, column_name in enumerate(columns_categorical):
+        plt.subplot(1, 3, i + 1)
+        value_counts = data[column_name].value_counts()
+        value_counts.plot.pie(autopct='%1.1f%%', colors=sns.color_palette
+                            (palette), startangle=90, explode=[explode] * value_counts.nunique())
+
+        plt.title(f'Percentage Distribution of {column_name}')
+        plt.ylabel('')
+
+    plt.tight_layout()
+    plt.show()
+    print(data[columns_categorical].value_counts())
+
+#%% ##Function for plot_sentiment_distribution
+
+def plot_sentiment_distribution(data, text_column, sentiment_column='sentiment_value', figsize=(15, 6),
+                                df_name='sentiment'):
+    data[sentiment_column] = data[text_column].apply(lambda x: TextBlob(x).sentiment.polarity)
+
+    fig, ax = plt.subplots(figsize=figsize)
+    sns.histplot(data[sentiment_column], bins=30, kde=True, ax=ax, color='blue')
+    ax.set_title(f'Sentiment Polarity Distribution - {df_name}')
+    ax.set_xlabel('Sentiment Polarity')
+    ax.set_ylabel('Frequency')
+    plt.tight_layout()
+    plt.show()
+
 #%% ##Function for plotting wordclouds
+
 def plot_wordcloud(df, spec_col, text_col):
     labels = df[spec_col].unique()
     num_labels = len(labels)

@@ -23,3 +23,4 @@ scikit-optimize
 wordcloud
 import-ipynb
 pandas
+textblob
